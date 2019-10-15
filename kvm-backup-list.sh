@@ -101,6 +101,7 @@ for DOMAIN in "${vm_list[@]}";
         BACKUPIMAGES=`virsh domblklist "$DOMAIN" --details | grep 'vd\|hd\|sd'| awk '{print $4}' | grep -v "^-"`
         for t in $TARGETS; do
             virsh blockcommit "$DOMAIN" "$t" --active --pivot >/dev/null
+            # virsh blockcommit server1 /mnt/folder/server1.backup --active --pivot
             if [ $? -ne 0 ]; then
                 echo "Could not merge changes for disk $t of $DOMAIN. VM may be in invalid state."
                 exit 1
