@@ -125,6 +125,7 @@ for DOMAIN in "${vm_list[@]}";
         for b in $LIST; do
             if [ $i -gt "$MAXBACKUPS" ]; then
                 echo "Removing old backup "`basename $b`
+               cd $BACKUPDOMAIN
                 rm -rf "$b"
             fi
 
